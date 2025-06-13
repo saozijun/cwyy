@@ -10,7 +10,6 @@ export default defineConfig({
     vue(),
     // vueDevTools(),
   ],
-  base: "/cwyy/",
   server: {
     host: "192.168.1.211", // 本地ip
     port: 5050, //端口
