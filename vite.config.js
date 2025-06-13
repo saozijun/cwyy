@@ -11,6 +11,10 @@ export default defineConfig({
     // vueDevTools(),
   ],
   base: "/cwyy/",
+  server: {
+    host: "192.168.1.211", // 本地ip
+    port: 5050, //端口
+  },
   build: {
     outDir: "cwyy", //指定打包输出路径
     assetsDir: "assets", //指定静态资源存放路径
