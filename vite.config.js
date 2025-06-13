@@ -15,7 +15,7 @@ export default defineConfig({
     port: 5050, //端口
   },
   build: {
-    outDir: "cwyy", //指定打包输出路径
+    outDir: "dist", //指定打包输出路径
     assetsDir: "assets", //指定静态资源存放路径
     cssCodeSplit: true, //css代码拆分,禁用则所有样式保存在一个css里面
     sourcemap: false, //是否构建source map 文件
