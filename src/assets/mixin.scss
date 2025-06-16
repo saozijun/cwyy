@@ -1,0 +1,36 @@
+// 滚动条样式
+@mixin right_scrollbar {
+  overflow: hidden;
+  overflow-y: auto;
+  scrollbar-color: auto;
+  user-select: none;
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(117, 117, 117, 0.184);
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.3vw;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50vh;
+    transition: 0.3s all;
+
+    &:hover {
+      background-color:rgba(117, 117, 117, 0.34)
+    }
+  }
+}
+
+// 多行溢出显示省略号
+@mixin ellipsis($row) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $row;
+  -webkit-box-orient: vertical;
+}

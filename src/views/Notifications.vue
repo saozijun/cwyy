@@ -1,20 +1,13 @@
 <template>
   <div class="notification-page">
-    <header class="header">
-      <span class="icon back-icon" @click="back">
-        <img src="../assets/back.png" alt="">
-      </span>
-      <h1 class="title">服务通知</h1>
-      <div class="icons-right">
-        <span class="icon search-icon">
-          <img src="../assets/search.png" alt="">
-        </span>
-        <span class="icon menu-icon">
-          <img src="../assets/menu.png" alt="">
-        </span>
-      </div>
-    </header>
-
+    <Nav title="服务通知">
+      <template #right>
+        <div class="icons-right">
+          <img src="../assets/search.png" alt="" />
+          <img src="../assets/menu.png" alt="" />
+        </div>
+      </template>
+    </Nav>
     <main class="main-content">
       <div v-if="reservations.length > 0">
         <template v-for="reservation in reservations" :key="reservation.id">
@@ -26,7 +19,7 @@
             <div class="card-header">
               <div class="card-title">
                 <span class="bell-icon">
-                  <img src="../assets/icon.png" alt="">
+                  <img src="../assets/icon.png" alt="" />
                 </span>
                 床位预约成功通知
               </div>
@@ -34,15 +27,21 @@
             </div>
             <div class="card-body">
               <h3 class="sub-title">就诊提醒/预约结果反馈通知</h3>
-              <p class="time"><span>时间</span> {{ formatAppointmentTime(reservation.createdAt) }}</p>
+              <p class="time">
+                <span>时间</span>
+                {{ formatAppointmentTime(reservation.createdAt) }}
+              </p>
               <p class="message">
-                【某某医院】尊敬的{{reservation.name}}{{reservation.gender == '女' ?  '女士' : '先生'}}：您好,您的床位已预约成功,请您确认时间后会尽快到达/及时就医或急诊处理！谢谢配合。
+                【某某医院】尊敬的{{ reservation.name
+                }}{{
+                  reservation.gender == "女" ? "女士" : "先生"
+                }}：您好,您的床位已预约成功,请您确认时间后会尽快到达/及时就医或急诊处理！谢谢配合。
               </p>
             </div>
             <div class="card-footer">
               <span>进入小程序查看</span>
               <span class="arrow">
-                <img src="../assets/r.png" alt="">
+                <img src="../assets/r.png" alt="" />
               </span>
             </div>
           </div>
@@ -56,48 +55,48 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-const reservations = ref([])
-const router = useRouter()
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const reservations = ref([]);
+const router = useRouter();
 
 const formatDividerDateTime = (isoString) => {
-  if (!isoString) return ''
-  const date = new Date(isoString)
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  let hours = date.getHours()
-  const minutes = date.getMinutes()
-  const period = hours >= 12 ? '下午' : '上午'
-  hours = hours % 12
-  hours = hours ? hours : 12 // the hour '0' should be '12'
-  const formattedMinutes = minutes < 10 ? '0' + minutes : minutes
-  return `${month}月${day}日 ${period}${hours}:${formattedMinutes}`
-}
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const period = hours >= 12 ? "下午" : "上午";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+  return `${month}月${day}日 ${period}${hours}:${formattedMinutes}`;
+};
 
 const formatAppointmentTime = (isoString) => {
-  if (!isoString) return ''
-  const date = new Date(isoString)
-  date.setDate(date.getDate() + 2)
-  const year = date.getFullYear()
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  const day = date.getDate().toString().padStart(2, '0')
-  const hours = date.getHours().toString().padStart(2, '0')
-  const minutes = date.getMinutes().toString().padStart(2, '0')
-  return `${year}-${month}-${day} ${hours}:${minutes}`
-}
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  date.setDate(date.getDate() + 2);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
 
 onMounted(() => {
-  const data = localStorage.getItem('reservations')
+  const data = localStorage.getItem("reservations");
   if (data) {
     reservations.value = JSON.parse(data)
-      .filter(r => r.status === 'arranged')
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .filter((r) => r.status === "arranged")
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   }
-})
+});
 const back = () => {
-  router.push('/details')
-}
+  router.push("/details");
+};
 </script>
 
 <style scoped>
@@ -106,43 +105,17 @@ const back = () => {
   min-height: 100vh;
   color: #333;
 }
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 1rem;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #eee;
-  position: fixed;
-  top: 0;
-}
-.header img{
-  position: relative;
-  top: 2px;
-}
-.title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-left: 40px;
-}
-.header .icon {
-  width: 18px;
-}
-.header .icon img{
-  width: 100%;
-}
-.header .search-icon, .header .menu-icon {
+.icons-right img{
   width: 20px;
 }
 .icons-right {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 1rem;
 }
 .main-content {
   padding: 1rem;
-  margin-top: 54px;
 }
 .entry-link-card {
   background-color: #fff;
@@ -157,7 +130,7 @@ const back = () => {
 .arrow {
   width: 15px;
 }
-.arrow img{
+.arrow img {
   width: 100%;
   position: relative;
   top: 1px;
@@ -195,7 +168,7 @@ const back = () => {
   width: 24px;
   height: 24px;
 }
-.bell-icon img{
+.bell-icon img {
   width: 100%;
 }
 .tea-icon {
@@ -210,7 +183,6 @@ const back = () => {
   font-weight: bold;
   font-size: 1.2rem;
   letter-spacing: 0.1rem;
-
 }
 .card-body {
   padding: 0 1rem 1rem;
@@ -225,8 +197,8 @@ const back = () => {
   font-weight: bold;
   margin: 0 0 1rem 0;
 }
-.time span{
-  font-size: .9rem;
+.time span {
+  font-size: 0.9rem;
   font-weight: 400;
   margin-right: 10px;
 }
@@ -266,4 +238,4 @@ const back = () => {
   color: #999;
   font-size: 1rem;
 }
-</style> 
+</style>

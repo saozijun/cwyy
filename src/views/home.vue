@@ -2,7 +2,6 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Toast from '../components/Toast.vue'
-
 const router = useRouter()
 const toast = ref(null)
 
@@ -39,24 +38,12 @@ const handleSubmit = () => {
   
   router.push('/success')
 }
-
-const goToDetails = () => {
-  router.push('/details')
-}
-
-const goToNotifications = () => {
-  router.push('/notifications')
-}
 </script>
 
 <template>
   <div class="page-container">
     <Toast ref="toast" />
-    <div class="header">
-      <span class="close-icon">×</span>
-      <h1 class="title">信息填报</h1>
-      <span class="more-icon">· · ·</span>
-    </div>
+    <Nav title="信息填报"></Nav>
     <div class="banner"></div>
     <div class="form-container">
       <div class="form-section-title">患者信息</div>
@@ -132,30 +119,7 @@ const goToNotifications = () => {
 .page-container {
   background-color: #f7f8fa;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.close-icon,
-.more-icon {
-  font-size: 1.5rem;
-  color: #333;
-  font-weight: 300;
-}
-
-.more-icon {
-  font-weight: bold;
-  letter-spacing: -2px;
 }
 
 .title {

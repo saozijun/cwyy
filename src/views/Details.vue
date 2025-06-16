@@ -1,11 +1,6 @@
 <template>
   <div class="page-container">
-    <div class="header">
-      <span class="close-icon" @click="goHome">×</span>
-      <h1 class="title">预约详情</h1>
-      <span class="more-icon">···</span>
-    </div>
-
+    <Nav title="预约详情"></Nav>
     <div v-if="reservations.length > 0" class="table-container">
       <table>
         <thead>
@@ -147,23 +142,6 @@ const goHome = () => {
 .page-container {
   background-color: #f7f8fa;
   min-height: 100vh;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #f0f0f0;
-}
-.close-icon,
-.more-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.more-icon {
-  font-weight: bold;
-  letter-spacing: 2px;
 }
 .title {
   font-size: 1.1rem;

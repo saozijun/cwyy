@@ -1,10 +1,6 @@
 <template>
   <div class="page-container">
-    <div class="header">
-      <span class="close-icon" @click="close">×</span>
-      <h1 class="title">信息填报</h1>
-      <span class="more-icon">···</span>
-    </div>
+    <Nav title="信息填报"></Nav>
     <div class="success-content">
       <div class="success-icon">
         <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,30 +29,7 @@ const close = () => {
 .page-container {
   background-color: #fff;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #333;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.close-icon,
-.more-icon {
-  font-size: 1.5rem;
-  color: #333;
-  font-weight: 300;
-  cursor: pointer;
-}
-
-.more-icon {
-  font-weight: bold;
-  letter-spacing: 2px;
 }
 
 .title {
